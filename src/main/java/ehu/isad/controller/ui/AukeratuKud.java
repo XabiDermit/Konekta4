@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,34 +15,38 @@ import java.util.ResourceBundle;
 public class AukeratuKud implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ivLogo.setImage(new Image("/argazkiak/logo.png"));
     }
 
     @FXML
-    private Button btnNormal;
+    private Button btn2Jokalari;
     @FXML
-    private Button btnFacil;
+    private Button btnErraza;
     @FXML
-    private Button btnDificil;
+    private Button btnZaila;
+    @FXML
+    private ImageView ivLogo;
+    private Label lblTaldea;
 
     private Main mainApp;
 
 
     @FXML
-    public void onClickNormal(ActionEvent actionEvent) {
+    public void onClick2Jokalari(ActionEvent actionEvent) {
+        this.mainApp.mainErakutsi();
+
+    }
+
+    @FXML
+    public void onClickErraza(ActionEvent actionEvent) {
         this.mainApp.mainErakutsi();
     }
 
     @FXML
-    public void onClickFacil(ActionEvent actionEvent) {
+    public void onClickZaila(ActionEvent actionEvent) {
         this.mainApp.mainErakutsi();
     }
 
-    @FXML
-    public void onClickDificil(ActionEvent actionEvent) {
-        this.mainApp.mainErakutsi();
-    }
+    public void setMainApp(Main main) { this.mainApp=main;}
 
-    public void setMainApp(Main main) { this.mainApp=main;
-    }
 }

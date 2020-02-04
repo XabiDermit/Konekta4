@@ -30,7 +30,7 @@ public class Main extends Application {
     stage = primaryStage;
     pantailakKargatu();
 
-    stage.setTitle("Auketatu");
+    stage.setTitle("KONEKTA 4");
     aukeratuScene = new Scene(aukeratuUI);
     stage.setScene(aukeratuScene);
     stage.show();
