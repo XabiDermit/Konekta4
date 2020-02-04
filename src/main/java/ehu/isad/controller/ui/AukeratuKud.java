@@ -27,14 +27,17 @@ public class AukeratuKud implements Initializable {
 
     @FXML
     public void onClickNormal(ActionEvent actionEvent) {
+        this.mainApp.mainErakutsi();
     }
 
     @FXML
     public void onClickFacil(ActionEvent actionEvent) {
+        this.mainApp.mainErakutsi();
     }
 
     @FXML
     public void onClickDificil(ActionEvent actionEvent) {
+        this.mainApp.mainErakutsi();
     }
 
     public void setMainApp(Main main) { this.mainApp=main;

@@ -13,12 +13,16 @@ import java.io.IOException;
 public class Main extends Application {
 
   private Parent aukeratuUI;
+  private Parent mainUI;
 
   private Stage stage;
 
   private AukeratuKud aukeratuKud;
+  private MainKud mainKud;
 
+  private Scene aukeratuScene;
   private Scene mainScene;
+
 
   @Override
   public void start(Stage primaryStage) throws Exception {
@@ -27,7 +31,8 @@ public class Main extends Application {
     pantailakKargatu();
 
     stage.setTitle("Auketatu");
-    stage.setScene(new Scene(aukeratuUI, 600, 400));
+    aukeratuScene = new Scene(aukeratuUI);
+    stage.setScene(aukeratuScene);
     stage.show();
   }
 
@@ -38,19 +43,31 @@ public class Main extends Application {
     aukeratuKud = loaderAukeratu.getController();
     aukeratuKud.setMainApp(this);
 
+    FXMLLoader laoderMain = new FXMLLoader(getClass().getResource("/main.fxml"));
+    mainUI = (Parent) laoderMain.load();
+    mainKud = laoderMain.getController();
+    mainKud.setMainApp(this);
+
   }
 
 
   public static void main(String[] args) {
     launch(args);
   }
-/*
-  public void herrialdeakErakutsi() {
-      if(UI2Scene==null){
-          UI2Scene =new Scene(UI2);
+
+  public void mainErakutsi() {
+      if(mainScene==null){
+          mainScene =new Scene(mainUI);
       }
-        stage.setScene(UI2Scene);
+        stage.setScene(mainScene);
         stage.show();
-        UI2Kud.partaideakErakutsi();
-  }*/
+  }
+
+  public void aukerakErakutsi(){
+    if(aukeratuScene==null){
+      aukeratuScene = new Scene(aukeratuUI);
+    }
+    stage.setScene(aukeratuScene);
+    stage.show();
+  }
 }
