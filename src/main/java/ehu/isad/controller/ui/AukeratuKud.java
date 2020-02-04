@@ -16,6 +16,7 @@ public class AukeratuKud implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ivLogo.setImage(new Image("/argazkiak/logo.png"));
+        lblTaldea.setText("PK_ClevelandChavaliers");
     }
 
     @FXML
@@ -26,6 +27,7 @@ public class AukeratuKud implements Initializable {
     private Button btnZaila;
     @FXML
     private ImageView ivLogo;
+    @FXML
     private Label lblTaldea;
 
     private Main mainApp;
