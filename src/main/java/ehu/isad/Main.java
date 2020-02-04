@@ -12,11 +12,11 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-  private Parent mainUI;
+  private Parent aukeratuUI;
 
   private Stage stage;
 
-  private MainKud mainKud;
+  private AukeratuKud aukeratuKud;
 
   private Scene mainScene;
 
@@ -26,19 +26,17 @@ public class Main extends Application {
     stage = primaryStage;
     pantailakKargatu();
 
-    stage.setTitle("Txanponak");
-    stage.setScene(new Scene(mainUI, 600, 400));
-    mainKud.comboBoxBete();
-    mainKud.taulaBete();
+    stage.setTitle("Auketatu");
+    stage.setScene(new Scene(aukeratuUI, 600, 400));
     stage.show();
   }
 
   private void pantailakKargatu() throws IOException {
 
-    FXMLLoader loadermain = new FXMLLoader(getClass().getResource("/main.fxml"));
-    mainUI = (Parent) loadermain.load();
-    mainKud = loadermain.getController();
-    mainKud.setMainApp(this);
+    FXMLLoader loaderAukeratu = new FXMLLoader(getClass().getResource("/aukeratu.fxml"));
+    aukeratuUI = (Parent) loaderAukeratu.load();
+    aukeratuKud = loaderAukeratu.getController();
+    aukeratuKud.setMainApp(this);
 
   }
 
