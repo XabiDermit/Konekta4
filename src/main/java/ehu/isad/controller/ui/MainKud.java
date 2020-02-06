@@ -360,7 +360,65 @@ public class MainKud implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        lblTxanda.setText("Txanda: Fitxa Urdina");      //defektuz hasieran
+
+        //defektuz hasieran
+        lblTxanda.setText("Txanda: Fitxa Urdina");
+
+        //fitxak hasieran hutsi
+        iv1x1.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x2.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x3.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x4.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x5.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x6.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x7.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x8.setImage(new Image("/argazkiak/hutsik.png"));
+        iv1x9.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x1.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x2.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x3.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x4.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x5.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x6.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x7.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x8.setImage(new Image("/argazkiak/hutsik.png"));
+        iv2x9.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x1.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x2.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x3.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x4.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x5.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x6.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x7.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x8.setImage(new Image("/argazkiak/hutsik.png"));
+        iv3x9.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x1.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x2.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x3.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x4.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x5.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x6.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x7.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x8.setImage(new Image("/argazkiak/hutsik.png"));
+        iv4x9.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x1.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x2.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x3.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x4.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x5.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x6.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x7.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x8.setImage(new Image("/argazkiak/hutsik.png"));
+        iv5x9.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x1.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x2.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x3.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x4.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x5.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x6.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x7.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x8.setImage(new Image("/argazkiak/hutsik.png"));
+        iv6x9.setImage(new Image("/argazkiak/hutsik.png"));
     }
 
     private int fitxaSartu(int pZutabea,String pTxanda){
