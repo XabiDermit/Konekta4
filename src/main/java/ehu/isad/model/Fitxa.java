@@ -1,15 +1,13 @@
 package ehu.isad.model;
 
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Fitxa {
 
     @FXML
     private Boolean hutsik = true;
 
-    private String fitxaMota;
+    private String fitxaMota= "esleituGabe";
 
     public Fitxa() {
     }
@@ -18,11 +16,13 @@ public class Fitxa {
         return hutsik;
     }
 
-    public void beteDa(){
-        hutsik=false;
+    public void setHutsik(boolean pBeteta){
+        hutsik=pBeteta;
     }
 
     public void setFitxaMota(String fitxaMota) {
         this.fitxaMota = fitxaMota;
     }
+
+    public String getFitxaMota(){return fitxaMota;}
 }

@@ -163,12 +163,14 @@ public class MainKud implements Initializable {
     @FXML
     private ImageView iv6x9;
 
+    private int erronda = 0;
 
     private String txanda = "fitxaUrdina"; //fitxaGorria edo fitxaUrdina(hasieran)
     //botoien metodoak
 
     @FXML
     public void onClickSartu1(ActionEvent actionEvent) {
+        this.erronda++;
        int errenkada = this.fitxaSartu(0, this.txanda);
        Image irudia = this.irudiaEsleitu();
        if (errenkada == 0){
@@ -185,10 +187,16 @@ public class MainKud implements Initializable {
            iv6x1.setImage(irudia);
        }
        this.txandaAldatu();
+       if(this.erronda>=7 && this.konprobatu()){
+           System.out.println("Bukatu da");
+           this.amoreEman();
+
+       }
     }
 
     @FXML
     public void onClickSartu2(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(1, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -205,10 +213,15 @@ public class MainKud implements Initializable {
             iv6x2.setImage(irudia);
         }
         this.txandaAldatu();
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickSartu3(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(2, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -225,10 +238,15 @@ public class MainKud implements Initializable {
             iv6x3.setImage(irudia);
         }
         this.txandaAldatu();
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickSartu4(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(3, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -245,10 +263,15 @@ public class MainKud implements Initializable {
             iv6x4.setImage(irudia);
         }
         this.txandaAldatu();
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickSartu5(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(4, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -265,10 +288,15 @@ public class MainKud implements Initializable {
             iv6x5.setImage(irudia);
         }
         this.txandaAldatu();
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickSartu6(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(5, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -285,10 +313,15 @@ public class MainKud implements Initializable {
             iv6x6.setImage(irudia);
         }
         this.txandaAldatu();
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickSartu7(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(6, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -305,10 +338,15 @@ public class MainKud implements Initializable {
             iv6x7.setImage(irudia);
         }
         this.txandaAldatu();
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickSartu8(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(7, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -325,10 +363,15 @@ public class MainKud implements Initializable {
             iv6x8.setImage(irudia);
         }
         this.txandaAldatu();
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickSartu9(ActionEvent actionEvent) {
+        this.erronda++;
         int errenkada = this.fitxaSartu(8, this.txanda);
         Image irudia = this.irudiaEsleitu();
         if (errenkada == 0){
@@ -345,10 +388,22 @@ public class MainKud implements Initializable {
             iv6x9.setImage(irudia);
         }
         this.txandaAldatu();
+
+        if(this.erronda>=7 && this.konprobatu()){
+            System.out.println("Bukatu da");
+            this.amoreEman();
+        }
     }
 
     @FXML
     public void onClickAmoreEman(ActionEvent actionEvent) {
+        this.amoreEman();
+    }
+
+    private void amoreEman(){
+        this.fitxakKendu();
+        Tableroa.getInstantzia().tableroaEzabatu();
+        this.erronda=0;
         this.mainApp.aukerakErakutsi();
     }
 
@@ -363,7 +418,34 @@ public class MainKud implements Initializable {
 
         //defektuz hasieran
         lblTxanda.setText("Txanda: Fitxa Urdina");
+        this.fitxakKendu();
+    }
 
+    private int fitxaSartu(int pZutabea,String pTxanda){
+        return Tableroa.getInstantzia().fitxaSartu(pZutabea, pTxanda);
+    }
+
+    private Image irudiaEsleitu(){
+        if ("fitxaUrdina".equals(txanda)){ return new Image("/argazkiak/fitxaUrdina.png");}
+        else{ return new Image("/argazkiak/fitxaGorria.png");}
+    }
+
+    private void txandaAldatu(){
+        if ("fitxaUrdina".equals(txanda)){
+            txanda = "fitxaGorria";
+            lblTxanda.setText("Txanda: Fitxa Gorria");
+        }
+        else{
+            txanda = "fitxaUrdina";
+            lblTxanda.setText("Txanda: Fitxa Urdina");
+        }
+    }
+
+    public boolean konprobatu(){
+        return Tableroa.getInstantzia().konprobatu();
+    }
+
+    private void fitxakKendu(){
         //fitxak hasieran hutsi
         iv1x1.setImage(new Image("/argazkiak/hutsik.png"));
         iv1x2.setImage(new Image("/argazkiak/hutsik.png"));
@@ -419,26 +501,6 @@ public class MainKud implements Initializable {
         iv6x7.setImage(new Image("/argazkiak/hutsik.png"));
         iv6x8.setImage(new Image("/argazkiak/hutsik.png"));
         iv6x9.setImage(new Image("/argazkiak/hutsik.png"));
-    }
-
-    private int fitxaSartu(int pZutabea,String pTxanda){
-        return Tableroa.getInstantzia().fitxaSartu(pZutabea, pTxanda);
-    }
-
-    private Image irudiaEsleitu(){
-        if ("fitxaUrdina".equals(txanda)){ return new Image("/argazkiak/fitxaUrdina.png");}
-        else{ return new Image("/argazkiak/fitxaGorria.png");}
-    }
-
-    private void txandaAldatu(){
-        if ("fitxaUrdina".equals(txanda)){
-            txanda = "fitxaGorria";
-            lblTxanda.setText("Txanda: Fitxa Gorria");
-        }
-        else{
-            txanda = "fitxaUrdina";
-            lblTxanda.setText("Txanda: Fitxa Urdina");
-        }
     }
 
 
