@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainKud implements Initializable {
 
@@ -166,6 +168,9 @@ public class MainKud implements Initializable {
     private int erronda = 0;
 
     private String txanda = "fitxaUrdina"; //fitxaGorria edo fitxaUrdina(hasieran)
+
+    private Timer timer;
+    TimerTask timerTask;
     //botoien metodoak
 
     @FXML
@@ -187,8 +192,9 @@ public class MainKud implements Initializable {
            iv6x1.setImage(irudia);
        }
        this.txandaAldatu();
+
        if(this.erronda>=7 && this.konprobatu()){
-           System.out.println("Bukatu da");
+           this.itxaron(5000);
            this.amoreEman();
 
        }
@@ -214,7 +220,7 @@ public class MainKud implements Initializable {
         }
         this.txandaAldatu();
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -239,7 +245,7 @@ public class MainKud implements Initializable {
         }
         this.txandaAldatu();
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -264,7 +270,7 @@ public class MainKud implements Initializable {
         }
         this.txandaAldatu();
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -289,7 +295,7 @@ public class MainKud implements Initializable {
         }
         this.txandaAldatu();
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -314,7 +320,7 @@ public class MainKud implements Initializable {
         }
         this.txandaAldatu();
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -339,7 +345,7 @@ public class MainKud implements Initializable {
         }
         this.txandaAldatu();
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -364,7 +370,7 @@ public class MainKud implements Initializable {
         }
         this.txandaAldatu();
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -390,7 +396,7 @@ public class MainKud implements Initializable {
         this.txandaAldatu();
 
         if(this.erronda>=7 && this.konprobatu()){
-            System.out.println("Bukatu da");
+            this.itxaron(1000);
             this.amoreEman();
         }
     }
@@ -445,6 +451,13 @@ public class MainKud implements Initializable {
         return Tableroa.getInstantzia().konprobatu();
     }
 
+    private void itxaron(long pZenbat){
+        try {
+            Thread.sleep(pZenbat);
+        }catch (InterruptedException e ){
+            e.printStackTrace();
+        }
+    }
     private void fitxakKendu(){
         //fitxak hasieran hutsi
         iv1x1.setImage(new Image("/argazkiak/hutsik.png"));
