@@ -35,6 +35,7 @@ public class Tableroa {
         else if (this.konprobatuDiagonaleanEskumatikEzkerrera()) {return true;}
         else{ return false;}
     }
+
     private boolean konprobatuHorizontalean(){
         for (int j = 0; j<6;j++){
             int zenbatOndoJarraian =0;
@@ -74,7 +75,6 @@ public class Tableroa {
                 }
 
             }
-
 
         }
         return false;
@@ -145,6 +145,8 @@ public class Tableroa {
 
         zenbatOndoJarraian=0;       //no estoy seguro, solo por si acaso
 
+        //5 luzeerako 2.kasua
+
         for(int i= 4; i<8; i++){
             String unekoFitxaMota = tableroa[9-i][i].getFitxaMota();
             String hurrengoFitxaMota = tableroa[8-i][i+1].getFitxaMota();
@@ -183,6 +185,107 @@ public class Tableroa {
     }
 
     private boolean konprobatuDiagonaleanEskumatikEzkerrera(){      //behetik gora \
+
+        /*
+        Horizontalean eta bertikalean konprobatzen dugunean, konprobatzen ditugun errenkada/zutabe guztiak luzeera berdina izango dute,
+        eta horregaitik 'for' bat erabiltzen dugunean ez ditugu arazoak izango.
+        Diagonalean konprobatzen dugunean, diagonal desberdinak izango ditugu eta luzeera desberdinak izango dituzte:
+                -4 luzeerako diagonalak: 2
+                -5 luzeerako diagonalak: 2
+                -6 luzeerako diagonalak: 4
+                (1, 2 eta 3 luzeerako diagonalean ez dira konprobatzen)
+        */
+
+        int zenbatOndoJarraian = 0;
+
+        //4 luzeerako 1. kasua
+
+        for (int i = 0; i<3; i++){
+            String unekoFitxaMota = tableroa[2+i][i].getFitxaMota();
+            String hurrengoFitxaMota = tableroa[3+i][i+1].getFitxaMota();
+            if(unekoFitxaMota.equals(hurrengoFitxaMota) && !"esleituGabe".equals(hurrengoFitxaMota)){
+                zenbatOndoJarraian++;
+                if (zenbatOndoJarraian==3){
+                    return true;
+                }
+            }else {
+                zenbatOndoJarraian = 0;
+            }
+        }
+
+        zenbatOndoJarraian = 0;
+
+        //4 luzeerako 2. kasua
+
+        for (int i = 5; i<8;i++){
+            String unekoFitxaMota = tableroa[i-5][i].getFitxaMota();
+            String hurrengoFitxaMota  = tableroa[i-4][i+1].getFitxaMota();
+            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
+                zenbatOndoJarraian++;
+                if(zenbatOndoJarraian==3){
+                    return true;
+                }
+            }else{
+                zenbatOndoJarraian=0;
+            }
+        }
+
+        zenbatOndoJarraian = 0;
+
+        //5 luzeerako 1. kasua
+
+        for (int i = 0;i<4;i++){
+            String unekoFitxaMota = tableroa[1+i][i].getFitxaMota();
+            String hurrengoFitxaMota = tableroa[2+i][i+1].getFitxaMota();
+            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
+                zenbatOndoJarraian++;
+                if(zenbatOndoJarraian==3){
+                    return true;
+                }
+            }else{
+                zenbatOndoJarraian=0;
+            }
+        }
+
+        zenbatOndoJarraian = 0;
+
+        //5 luzeerako 2. kasua
+
+        for(int i= 4; i<8; i++){
+            String unekoFitxaMota = tableroa[i-4][i].getFitxaMota();
+            String hurrengoFitxaMota = tableroa[i-3][i+1].getFitxaMota();
+            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
+                zenbatOndoJarraian++;
+                if(zenbatOndoJarraian==3){
+                    return true;
+                }
+            }else{
+                zenbatOndoJarraian=0;
+            }
+        }
+
+        zenbatOndoJarraian = 0;
+
+        //6 luzeerako kasuak
+
+        //horizontalean mugitzeko
+        for (int j=0; j<4;j++){
+            //diagonalean mugitzeko
+            for(int i= 0; i<5; i++){
+                String unekoFitxaMota = tableroa[i][i+j].getFitxaMota();
+                String hurrengoFitxaMota = tableroa[1+i][i+1+j].getFitxaMota();
+                if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
+                    zenbatOndoJarraian++;
+                    if(zenbatOndoJarraian==3){
+                        return true;
+                    }
+                }else{
+                    zenbatOndoJarraian=0;
+                }
+            }
+
+        }
+
         return false;
     }
 
