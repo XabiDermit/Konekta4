@@ -55,12 +55,13 @@ public class Main extends Application {
     launch(args);
   }
 
-  public void mainErakutsi() {
+  public void mainErakutsi(String pJokoModua) {
       if(mainScene==null){
           mainScene =new Scene(mainUI);
       }
         stage.setScene(mainScene);
         stage.show();
+        mainKud.setJokoModua(pJokoModua);
   }
 
   public void aukerakErakutsi(){

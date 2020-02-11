@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -177,6 +178,9 @@ public class MainKud implements Initializable {
     @FXML
     private Label lblTaldea;
 
+    private String jokoModua;
+
+
     //botoien metodoak
 
     @FXML
@@ -212,6 +216,9 @@ public class MainKud implements Initializable {
                 this.itxaron(5000);
                 this.amoreEman();
             }
+
+        }if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
         }
     }
 
@@ -249,7 +256,9 @@ public class MainKud implements Initializable {
             }
         }
 
-
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
+        }
     }
 
     @FXML
@@ -282,6 +291,9 @@ public class MainKud implements Initializable {
                 this.itxaron(1000);
                 this.amoreEman();
             }
+        }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
         }
 
     }
@@ -316,6 +328,9 @@ public class MainKud implements Initializable {
                 this.amoreEman();
             }
         }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
+        }
 
     }
 
@@ -348,6 +363,9 @@ public class MainKud implements Initializable {
                 this.itxaron(1000);
                 this.amoreEman();
             }
+        }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
         }
 
     }
@@ -382,6 +400,9 @@ public class MainKud implements Initializable {
                 this.amoreEman();
             }
         }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
+        }
 
     }
 
@@ -415,6 +436,9 @@ public class MainKud implements Initializable {
                 this.amoreEman();
             }
         }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
+        }
 
     }
 
@@ -447,6 +471,9 @@ public class MainKud implements Initializable {
                 this.itxaron(1000);
                 this.amoreEman();
             }
+        }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
         }
 
     }
@@ -482,6 +509,9 @@ public class MainKud implements Initializable {
                 this.amoreEman();
             }
         }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
+        }
 
     }
 
@@ -494,6 +524,7 @@ public class MainKud implements Initializable {
         this.fitxakKendu();
         Tableroa.getInstantzia().tableroaEzabatu();
         this.erronda=0;
+        this.setJokoModua(" ");
         this.mainApp.aukerakErakutsi();
     }
 
@@ -537,12 +568,51 @@ public class MainKud implements Initializable {
     }
 
     private void itxaron(long pZenbat){
-      /*  try {
+        try {
             Thread.sleep(pZenbat);
         }catch (InterruptedException e ){
             e.printStackTrace();
-        }*/
+        }
     }
+
+    public void setJokoModua(String jokoModua) {
+        this.jokoModua = jokoModua;
+    }
+
+    private void fitxaZorizSartu(){
+        //this.itxaron(1000);
+        ActionEvent actionEvent = new ActionEvent();
+        Random rd = new Random();
+        int zutabea = rd.nextInt(9);
+        if(zutabea==0){
+            this.onClickSartu1(actionEvent);
+        }
+        if(zutabea==1){
+            this.onClickSartu2(actionEvent);
+        }
+        else if(zutabea==2){
+            this.onClickSartu3(actionEvent);
+        }
+        else if(zutabea==3){
+            this.onClickSartu4(actionEvent);
+        }
+        else if(zutabea==4){
+            this.onClickSartu5(actionEvent);
+        }
+        else if(zutabea==5){
+            this.onClickSartu6(actionEvent);
+        }
+        else if(zutabea==6){
+            this.onClickSartu7(actionEvent);
+        }
+        else if(zutabea==7){
+            this.onClickSartu8(actionEvent);
+        }
+        else if(zutabea==8){
+            this.onClickSartu9(actionEvent);
+        }
+    }
+
     private void fitxakKendu(){
         //fitxak hasieran hutsi
         iv1x1.setImage(new Image("/argazkiak/hutsik.png"));

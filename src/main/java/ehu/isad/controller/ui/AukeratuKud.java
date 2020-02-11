@@ -35,18 +35,19 @@ public class AukeratuKud implements Initializable {
 
     @FXML
     public void onClick2Jokalari(ActionEvent actionEvent) {
-        this.mainApp.mainErakutsi();
-
+        this.mainApp.mainErakutsi("biJokalari");
     }
 
     @FXML
     public void onClickErraza(ActionEvent actionEvent) {
-        this.mainApp.mainErakutsi();
+
+        this.mainApp.mainErakutsi("random");
     }
 
     @FXML
     public void onClickZaila(ActionEvent actionEvent) {
-        this.mainApp.mainErakutsi();
+
+        this.mainApp.mainErakutsi("makinarenKontra");
     }
 
     public void setMainApp(Main main) { this.mainApp=main;}
