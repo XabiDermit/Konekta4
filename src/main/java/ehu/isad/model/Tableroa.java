@@ -289,6 +289,72 @@ public class Tableroa {
         return false;
     }
 
+    public int makinaNonSartu(){
+        /*
+        1. pausua: array bat lortu behar dugu, fitxak non satu dezakegun jakiteko
+        2. pausua: array horren puntuazioak lortu
+        3. pausua: puntuazio handiena duen lekuan sartu
+        */
+
+        //1.pausua:
+
+        int[] fitxenHurrengoPosizioa = new int[9];     //fitxa bat sartzen badugu zutabe horretan zein errenkadan geratuko den
+        int[] puntuazioenBektorea = new int[9];
+        for(int i=0; i<9;i++){
+            for(int j=0;i<6;j++){
+                if("esleituGabe".equals(tableroa[5-j][i].getFitxaMota())){
+                    fitxenHurrengoPosizioa[i]=5-j;
+                    break;
+            }
+        }
+
+        //2.pausua:
+
+        /*
+        emango diren puntuazioak:
+
+            5: makinak hiru fitxa jarraian ditu
+            4: beste jokalariak hiru fitxa jarraian ditu
+            3: makina 2 fitxa jarraian ditu
+            2: beste jokalariak 2 fitxa jarraian ditu
+            1: makinak ez ditu 2 fitxa jarraian
+
+         */
+
+        //zutabe bakoitzerako horizontalean, bertikalean eta diagonalean (bi kasuak) konprobatu
+
+        //bertikalean konprobatu
+
+        for (int x=0; x<9; x++) {
+            int hurrengoFitxarenPosizioa = fitxenHurrengoPosizioa[x];   //[0...5]
+            int makinarenZenbatFitxaJarraian = 0;
+            int jokalariarenZenbatFitxaJarraian = 0;
+            if (hurrengoFitxarenPosizioa <= 3) {
+
+                //makinaren fitxak nola dauden jakiteko
+                for (int y = hurrengoFitxarenPosizioa + 1; y < 5; y++){
+                    if ("fitxaGorria".equals(tableroa[y][x].getFitxaMota())){
+                        makinarenZenbatFitxaJarraian++;
+                    }else{
+                        break;
+                    }
+                }
+
+                //jokalariaren fitxak nola dauden jakiteko
+
+
+            }else if (hurrengoFitxarenPosizioa== 4 && "fitxaGorria".equals(tableroa[5][x].getFitxaMota())){
+
+            }
+            if(makinarenZenbatFitxaJarraian==2){      //hiru fitxa jarraian ditugu
+                puntuazioenBektorea[x]=5;
+            }else if(makinarenZenbatFitxaJarraian==1) {    //bi fitxa jarraian ditugu
+                puntuazioenBektorea[x]=3;
+            }
+
+
+        }
+    }
 
     public void tableroaEzabatu(){
         for(int i=0;i<9;i++){
