@@ -302,9 +302,10 @@ public class Tableroa {
         int[] puntuazioenBektorea = new int[9];
         for(int i=0; i<9;i++){
             for(int j=0;i<6;j++){
-                if("esleituGabe".equals(tableroa[5-j][i].getFitxaMota())){
-                    fitxenHurrengoPosizioa[i]=5-j;
+                if("esleituGabe".equals(tableroa[5-j][i].getFitxaMota())) {
+                    fitxenHurrengoPosizioa[i] = 5 - j;
                     break;
+                }
             }
         }
 
@@ -313,47 +314,74 @@ public class Tableroa {
         /*
         emango diren puntuazioak:
 
-            5: makinak hiru fitxa jarraian ditu
-            4: beste jokalariak hiru fitxa jarraian ditu
-            3: makina 2 fitxa jarraian ditu
-            2: beste jokalariak 2 fitxa jarraian ditu
-            1: makinak ez ditu 2 fitxa jarraian
+            6: makinak hiru fitxa jarraian ditu
+            5: beste jokalariak hiru fitxa jarraian ditu
+            4: makina 2 fitxa jarraian ditu
+            3: beste jokalariak 2 fitxa jarraian ditu
+            2: makinak ez ditu 2 fitxa jarraian (bakarrik fitxa bat dauka)
+            1: beste jokalariak ez ditu bi fitxa jarraian (bakarrik fitxa bat dauka)
+            0: fitxarik ez badago
 
          */
+
 
         //zutabe bakoitzerako horizontalean, bertikalean eta diagonalean (bi kasuak) konprobatu
 
         //bertikalean konprobatu
 
         for (int x=0; x<9; x++) {
-            int hurrengoFitxarenPosizioa = fitxenHurrengoPosizioa[x];   //[0...5]
-            int makinarenZenbatFitxaJarraian = 0;
-            int jokalariarenZenbatFitxaJarraian = 0;
-            if (hurrengoFitxarenPosizioa <= 3) {
+            int hurrengoFitxarenPosizioa = fitxenHurrengoPosizioa[x];   //[0...5]  (y ardatza)
+            if(hurrengoFitxarenPosizioa <=3){       //bestela nullPointerException izango dugu
+                String behekoFitxaMota = tableroa[hurrengoFitxarenPosizioa+1][x].getFitxaMota();
+                int zenbatJarraian = 0;
+                for (int lag= hurrengoFitxarenPosizioa + 2; lag <6; lag++){
+                    if(behekoFitxaMota.equals(tableroa[lag][x].getFitxaMota())) {
+                        zenbatJarraian++;
+                    }else{break;}
+                }
 
-                //makinaren fitxak nola dauden jakiteko
-                for (int y = hurrengoFitxarenPosizioa + 1; y < 5; y++){
-                    if ("fitxaGorria".equals(tableroa[y][x].getFitxaMota())){
-                        makinarenZenbatFitxaJarraian++;
-                    }else{
-                        break;
+                if("fitxaGorria".equals(behekoFitxaMota)) {
+                    if(zenbatJarraian==0) {      //ez daude fitxak jarraian, bakarrik gorri bat
+                        puntuazioenBektorea[x] = 2;
+                    }else if( zenbatJarraian==1) {       //bi fitxa gorri daude jarraian
+                        puntuazioenBektorea[x] = 4;
+                    }else if(zenbatJarraian==2) {       //hiru fitxa gorri daude jarraian
+                        puntuazioenBektorea[x] = 6;
+                    }
+                }else if ("fitxaUrdina".equals(behekoFitxaMota)){
+                    if(zenbatJarraian==0){      //ez daude fitxak jarraian, bakarrik urdin bat
+                        puntuazioenBektorea[x]=1;
+                    }else if(zenbatJarraian==1){        //beste jokalariak bi fitxa urdin ditu jarraian
+                        puntuazioenBektorea[x] = 3;
+                    }else if(zenbatJarraian==2) {        //beste jokalariak hiru fitxa urdin ditu jarraian
+                        puntuazioenBektorea[x] = 5;
                     }
                 }
 
-                //jokalariaren fitxak nola dauden jakiteko
-
-
-            }else if (hurrengoFitxarenPosizioa== 4 && "fitxaGorria".equals(tableroa[5][x].getFitxaMota())){
-
+            }else if( hurrengoFitxarenPosizioa==4){       //bakarrik fitxa  bat dago
+                if ("fitxaGorria".equals(tableroa[5][x].getFitxaMota())){
+                    puntuazioenBektorea[x]= 2;
+                }else  if("fitxaUrdina".equals(tableroa[5][x].getFitxaMota())) {
+                    puntuazioenBektorea[x]= 1;
+                }
+            }else {
+                puntuazioenBektorea[x] = 0;
             }
-            if(makinarenZenbatFitxaJarraian==2){      //hiru fitxa jarraian ditugu
-                puntuazioenBektorea[x]=5;
-            }else if(makinarenZenbatFitxaJarraian==1) {    //bi fitxa jarraian ditugu
-                puntuazioenBektorea[x]=3;
-            }
-
 
         }
+        return this.zeinDaZutaberikOnena(puntuazioenBektorea);
+    }
+
+    private int zeinDaZutaberikOnena(int[] pPuntuazioak){
+        int zutaberikOnena = 4;         //erdiko zutabea, kasu gehienak aurkezten dituena da
+        int puntuazioAltuena = 0;
+        for (int i =0; i<9; i++){
+            if (pPuntuazioak[i]> puntuazioAltuena){
+                puntuazioAltuena = pPuntuazioak[i];
+                zutaberikOnena =i;
+            }
+        }
+        return zutaberikOnena;
     }
 
     public void tableroaEzabatu(){

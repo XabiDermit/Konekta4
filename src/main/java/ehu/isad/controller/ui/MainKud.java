@@ -217,9 +217,13 @@ public class MainKud implements Initializable {
                 this.amoreEman();
             }
 
-        }if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
         }
+        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
+        }
+
     }
 
     @FXML
@@ -258,6 +262,8 @@ public class MainKud implements Initializable {
 
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
     }
 
@@ -294,6 +300,8 @@ public class MainKud implements Initializable {
         }
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
 
     }
@@ -330,6 +338,8 @@ public class MainKud implements Initializable {
         }
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
 
     }
@@ -366,6 +376,8 @@ public class MainKud implements Initializable {
         }
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
 
     }
@@ -402,6 +414,8 @@ public class MainKud implements Initializable {
         }
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
 
     }
@@ -438,6 +452,8 @@ public class MainKud implements Initializable {
         }
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
 
     }
@@ -474,6 +490,8 @@ public class MainKud implements Initializable {
         }
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
 
     }
@@ -511,6 +529,8 @@ public class MainKud implements Initializable {
         }
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
+        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
+            this.makinarenKontraJolastu();
         }
 
     }
@@ -584,6 +604,39 @@ public class MainKud implements Initializable {
         ActionEvent actionEvent = new ActionEvent();
         Random rd = new Random();
         int zutabea = rd.nextInt(9);
+        if(zutabea==0){
+            this.onClickSartu1(actionEvent);
+        }
+        if(zutabea==1){
+            this.onClickSartu2(actionEvent);
+        }
+        else if(zutabea==2){
+            this.onClickSartu3(actionEvent);
+        }
+        else if(zutabea==3){
+            this.onClickSartu4(actionEvent);
+        }
+        else if(zutabea==4){
+            this.onClickSartu5(actionEvent);
+        }
+        else if(zutabea==5){
+            this.onClickSartu6(actionEvent);
+        }
+        else if(zutabea==6){
+            this.onClickSartu7(actionEvent);
+        }
+        else if(zutabea==7){
+            this.onClickSartu8(actionEvent);
+        }
+        else if(zutabea==8){
+            this.onClickSartu9(actionEvent);
+        }
+    }
+
+    private void makinarenKontraJolastu(){
+        ActionEvent actionEvent = new ActionEvent();
+        int zutabea = Tableroa.getInstantzia().makinaNonSartu();
+
         if(zutabea==0){
             this.onClickSartu1(actionEvent);
         }
