@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 public class AukeratuKud implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ivLogo.setImage(new Image("/argazkiak/logo.png"));
+        ivLogo.setImage(new Image("/HUTSIK/logo.png"));
         lblTaldea.setText("PK_ClevelandChavaliers");
     }
 

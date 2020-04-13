@@ -13,8 +13,6 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainKud implements Initializable {
 
@@ -221,7 +219,7 @@ public class MainKud implements Initializable {
 
     @FXML
     public void onClickAmoreEman(ActionEvent actionEvent) {
-        this.amoreEman();
+        this.partidaBukatu();
     }
 
     //beste metodoak
@@ -368,8 +366,15 @@ public class MainKud implements Initializable {
         this.txandaAldatu();
 
         if (this.erronda >= 7){
-            if(this.konprobatu()) {
-                 this.amoreEman();
+            int partidaEmaitza = this.konprobatu();
+            /*
+            partidaEmaitza== -1 --> partida ez da bukatu
+            partidaEmaitza== 0 --> enpate bat egon da
+            partidaEmaitza== 1 --> fitxaGorriak irabazi dute
+            partidaEmaitza== 2 --> fitxaUrdinak irabazi dute
+             */
+            if(partidaEmaitza==0 || partidaEmaitza==1 || partidaEmaitza==2) {
+                 this.partidaBukatu();
             }
         }
 
@@ -381,7 +386,9 @@ public class MainKud implements Initializable {
 
     }
 
-    private void amoreEman(){
+    private void partidaBukatu(){
+        txanda= "fitxaUrdina";
+        lblTxanda.setText("Txanda: Fitxa Urdina");
         this.fitxakKendu();
         Tableroa.getInstantzia().tableroaEzabatu();
         this.erronda=0;
@@ -397,7 +404,7 @@ public class MainKud implements Initializable {
 
         //defektuz hasieran
         lblTxanda.setText("Txanda: Fitxa Urdina");
-        ivLogo.setImage(new Image("/argazkiak/logo.png"));
+        ivLogo.setImage(new Image("/HUTSIK/logo.png"));
         this.fitxakKendu();
     }
 
@@ -406,8 +413,8 @@ public class MainKud implements Initializable {
     }
 
     private Image irudiaEsleitu(){
-        if ("fitxaUrdina".equals(txanda)){ return new Image("/argazkiak/fitxaUrdina.png");}
-        else{ return new Image("/argazkiak/fitxaGorria.png");}
+        if ("fitxaUrdina".equals(txanda)){ return new Image("/HUTSIK/fitxaUrdina.png");}
+        else{ return new Image("/HUTSIK/fitxaGorria.png");}
     }
 
     private void txandaAldatu(){
@@ -421,7 +428,7 @@ public class MainKud implements Initializable {
         }
     }
 
-    public boolean konprobatu(){
+    public int konprobatu(){
         return Tableroa.getInstantzia().konprobatu();
     }
 
@@ -471,94 +478,99 @@ public class MainKud implements Initializable {
     }
 
     private void makinarenKontraJolastu(){
+        int aImugimendua;
+        if (erronda==1){
+            aImugimendua=4;
+        }else {
+            aImugimendua = Tableroa.getInstantzia().lortuAImugimendua();
+        }
         ActionEvent actionEvent = new ActionEvent();
-        int zutabea = Tableroa.getInstantzia().makinaNonSartu();
-
-        if(zutabea==0){
+        if(aImugimendua==0){
             this.onClickSartu1(actionEvent);
         }
-        if(zutabea==1){
+        if(aImugimendua==1){
             this.onClickSartu2(actionEvent);
         }
-        else if(zutabea==2){
+        else if(aImugimendua==2){
             this.onClickSartu3(actionEvent);
         }
-        else if(zutabea==3){
+        else if(aImugimendua==3){
             this.onClickSartu4(actionEvent);
         }
-        else if(zutabea==4){
+        else if(aImugimendua==4){
             this.onClickSartu5(actionEvent);
         }
-        else if(zutabea==5){
+        else if(aImugimendua==5){
             this.onClickSartu6(actionEvent);
         }
-        else if(zutabea==6){
+        else if(aImugimendua==6){
             this.onClickSartu7(actionEvent);
         }
-        else if(zutabea==7){
+        else if(aImugimendua==7){
             this.onClickSartu8(actionEvent);
         }
-        else if(zutabea==8){
+        else if(aImugimendua==8){
             this.onClickSartu9(actionEvent);
         }
     }
 
     private void fitxakKendu(){
         //fitxak hasieran hutsi
-        iv1x1.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x2.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x3.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x4.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x5.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x6.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x7.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x8.setImage(new Image("/argazkiak/hutsik.png"));
-        iv1x9.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x1.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x2.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x3.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x4.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x5.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x6.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x7.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x8.setImage(new Image("/argazkiak/hutsik.png"));
-        iv2x9.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x1.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x2.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x3.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x4.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x5.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x6.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x7.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x8.setImage(new Image("/argazkiak/hutsik.png"));
-        iv3x9.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x1.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x2.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x3.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x4.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x5.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x6.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x7.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x8.setImage(new Image("/argazkiak/hutsik.png"));
-        iv4x9.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x1.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x2.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x3.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x4.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x5.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x6.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x7.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x8.setImage(new Image("/argazkiak/hutsik.png"));
-        iv5x9.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x1.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x2.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x3.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x4.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x5.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x6.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x7.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x8.setImage(new Image("/argazkiak/hutsik.png"));
-        iv6x9.setImage(new Image("/argazkiak/hutsik.png"));
+        Image hutsik = new Image("/HUTSIK/hutsik.png");
+        iv1x1.setImage(hutsik);
+        iv1x2.setImage(hutsik);
+        iv1x3.setImage(hutsik);
+        iv1x4.setImage(hutsik);
+        iv1x5.setImage(hutsik);
+        iv1x6.setImage(hutsik);
+        iv1x7.setImage(hutsik);
+        iv1x8.setImage(hutsik);
+        iv1x9.setImage(hutsik);
+        iv2x1.setImage(hutsik);
+        iv2x2.setImage(hutsik);
+        iv2x3.setImage(hutsik);
+        iv2x4.setImage(hutsik);
+        iv2x5.setImage(hutsik);
+        iv2x6.setImage(hutsik);
+        iv2x7.setImage(hutsik);
+        iv2x8.setImage(hutsik);
+        iv2x9.setImage(hutsik);
+        iv3x1.setImage(hutsik);
+        iv3x2.setImage(hutsik);
+        iv3x3.setImage(hutsik);
+        iv3x4.setImage(hutsik);
+        iv3x5.setImage(hutsik);
+        iv3x6.setImage(hutsik);
+        iv3x7.setImage(hutsik);
+        iv3x8.setImage(hutsik);
+        iv3x9.setImage(hutsik);
+        iv4x1.setImage(hutsik);
+        iv4x2.setImage(hutsik);
+        iv4x3.setImage(hutsik);
+        iv4x4.setImage(hutsik);
+        iv4x5.setImage(hutsik);
+        iv4x6.setImage(hutsik);
+        iv4x7.setImage(hutsik);
+        iv4x8.setImage(hutsik);
+        iv4x9.setImage(hutsik);
+        iv5x1.setImage(hutsik);
+        iv5x2.setImage(hutsik);
+        iv5x3.setImage(hutsik);
+        iv5x4.setImage(hutsik);
+        iv5x5.setImage(hutsik);
+        iv5x6.setImage(hutsik);
+        iv5x7.setImage(hutsik);
+        iv5x8.setImage(hutsik);
+        iv5x9.setImage(hutsik);
+        iv6x1.setImage(hutsik);
+        iv6x2.setImage(hutsik);
+        iv6x3.setImage(hutsik);
+        iv6x4.setImage(hutsik);
+        iv6x5.setImage(hutsik);
+        iv6x6.setImage(hutsik);
+        iv6x7.setImage(hutsik);
+        iv6x8.setImage(hutsik);
+        iv6x9.setImage(hutsik);
     }
 
 
