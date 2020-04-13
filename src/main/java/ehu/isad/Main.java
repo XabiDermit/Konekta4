@@ -1,6 +1,5 @@
 package ehu.isad;
 
-import ehu.isad.controller.db.DBKudeatzaile;
 import ehu.isad.controller.ui.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -62,6 +61,7 @@ public class Main extends Application {
         stage.setScene(mainScene);
         stage.show();
         mainKud.setJokoModua(pJokoModua);
+        //mainKud.jolastu();
   }
 
   public void aukerakErakutsi(){

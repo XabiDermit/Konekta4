@@ -40,13 +40,11 @@ public class AukeratuKud implements Initializable {
 
     @FXML
     public void onClickErraza(ActionEvent actionEvent) {
-
         this.mainApp.mainErakutsi("random");
     }
 
     @FXML
     public void onClickZaila(ActionEvent actionEvent) {
-
         this.mainApp.mainErakutsi("makinarenKontra");
     }
 

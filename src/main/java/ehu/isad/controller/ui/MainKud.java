@@ -180,14 +180,56 @@ public class MainKud implements Initializable {
 
     private String jokoModua;
 
-
     //botoien metodoak
 
     @FXML
     public void onClickSartu1(ActionEvent actionEvent) {
+        botoiaSakatu(0);
+    }
+    @FXML
+    public void onClickSartu2(ActionEvent actionEvent) {
+        botoiaSakatu(1);
+    }
+    @FXML
+    public void onClickSartu3(ActionEvent actionEvent) {
+        botoiaSakatu(2);
+    }
+    @FXML
+    public void onClickSartu4(ActionEvent actionEvent) {
+        botoiaSakatu(3);
+    }
+    @FXML
+    public void onClickSartu5(ActionEvent actionEvent) {
+        botoiaSakatu(4);
+    }
+    @FXML
+    public void onClickSartu6(ActionEvent actionEvent) {
+        botoiaSakatu(5);
+    }
+    @FXML
+    public void onClickSartu7(ActionEvent actionEvent) {
+        botoiaSakatu(6);
+    }
+    @FXML
+    public void onClickSartu8(ActionEvent actionEvent) {
+        botoiaSakatu(7);
+    }
+    @FXML
+    public void onClickSartu9(ActionEvent actionEvent) {
+        botoiaSakatu(8);
+    }
+
+    @FXML
+    public void onClickAmoreEman(ActionEvent actionEvent) {
+        this.amoreEman();
+    }
+
+    //beste metodoak
+
+    public void botoiaSakatu(int i){
         this.erronda++;
         this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(0, this.txanda);
+        int errenkada = this.fitxaSartu(i, this.txanda);
         Image irudia = this.irudiaEsleitu();
 
         if (errenkada==10){
@@ -195,7 +237,7 @@ public class MainKud implements Initializable {
             lblZutabeaBeteta.setVisible(true);
             this.erronda--;
 
-        }else {
+        }else if(i==0) {
             if (errenkada == 0) {
                 iv1x1.setImage(irudia);
             } else if (errenkada == 1) {
@@ -209,335 +251,134 @@ public class MainKud implements Initializable {
             } else if (errenkada == 5) {
                 iv6x1.setImage(irudia);
             }
-
-            this.txandaAldatu();
-
-            if (this.erronda >= 7 && this.konprobatu()) {
-                this.itxaron(5000);
-                this.amoreEman();
-            }
-
-        }
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-
-    }
-
-    @FXML
-    public void onClickSartu2(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(1, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-
-        if(errenkada==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==1) {
+            if (errenkada == 0) {
                 iv1x2.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x2.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x2.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x2.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x2.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x2.setImage(irudia);
             }
-
-            this.txandaAldatu();
-
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
-            }
-        }
-
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-    }
-
-    @FXML
-    public void onClickSartu3(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(2, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-
-        if(errenkada ==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==2) {
+            if (errenkada == 0) {
                 iv1x3.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x3.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x3.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x3.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x3.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x3.setImage(irudia);
             }
-            this.txandaAldatu();
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
-            }
-        }
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-
-    }
-
-    @FXML
-    public void onClickSartu4(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(3, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-        if(errenkada==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==3) {
+            if (errenkada == 0) {
                 iv1x4.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x4.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x4.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x4.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x4.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x4.setImage(irudia);
             }
-            this.txandaAldatu();
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
-            }
-        }
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-
-    }
-
-    @FXML
-    public void onClickSartu5(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(4, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-        if(errenkada==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==4) {
+            if (errenkada == 0) {
                 iv1x5.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x5.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x5.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x5.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x5.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x5.setImage(irudia);
             }
-            this.txandaAldatu();
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
-            }
-        }
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-
-    }
-
-    @FXML
-    public void onClickSartu6(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(5, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-        if(errenkada==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==5) {
+            if (errenkada == 0) {
                 iv1x6.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x6.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x6.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x6.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x6.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x6.setImage(irudia);
             }
-            this.txandaAldatu();
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
-            }
-        }
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-
-    }
-
-    @FXML
-    public void onClickSartu7(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(6, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-        if(errenkada==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==6) {
+            if (errenkada == 0) {
                 iv1x7.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x7.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x7.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x7.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x7.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x7.setImage(irudia);
             }
-            this.txandaAldatu();
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
-            }
-        }
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-
-    }
-
-    @FXML
-    public void onClickSartu8(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(7, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-        if(errenkada==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==7) {
+            if (errenkada == 0) {
                 iv1x8.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x8.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x8.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x8.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x8.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x8.setImage(irudia);
             }
-            this.txandaAldatu();
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
-            }
-        }
-        if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.fitxaZorizSartu();
-        }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
-            this.makinarenKontraJolastu();
-        }
-
-    }
-
-    @FXML
-    public void onClickSartu9(ActionEvent actionEvent) {
-        this.erronda++;
-        this.lblZutabeaBeteta.setVisible(false);
-        int errenkada = this.fitxaSartu(8, this.txanda);
-        Image irudia = this.irudiaEsleitu();
-        if(errenkada==10){
-            //aukeratu duen zutabea beteta dago
-            lblZutabeaBeteta.setVisible(true);
-            this.erronda--;
-        }else{
-            if (errenkada == 0){
+        }else if(i==8) {
+            if (errenkada == 0) {
                 iv1x9.setImage(irudia);
-            }else if(errenkada==1){
+            } else if (errenkada == 1) {
                 iv2x9.setImage(irudia);
-            }else if(errenkada==2){
+            } else if (errenkada == 2) {
                 iv3x9.setImage(irudia);
-            }else if(errenkada==3){
+            } else if (errenkada == 3) {
                 iv4x9.setImage(irudia);
-            }else if(errenkada==4){
+            } else if (errenkada == 4) {
                 iv5x9.setImage(irudia);
-            }else {
+            } else if (errenkada == 5) {
                 iv6x9.setImage(irudia);
             }
-            this.txandaAldatu();
+        }
 
-            if(this.erronda>=7 && this.konprobatu()){
-                this.itxaron(1000);
-                this.amoreEman();
+        this.txandaAldatu();
+
+        if (this.erronda >= 7){
+            if(this.konprobatu()) {
+                 this.amoreEman();
             }
         }
+
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
         }else if("makinarenKontra".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.makinarenKontraJolastu();
         }
 
-    }
-
-    @FXML
-    public void onClickAmoreEman(ActionEvent actionEvent) {
-        this.amoreEman();
     }
 
     private void amoreEman(){
@@ -547,9 +388,6 @@ public class MainKud implements Initializable {
         this.setJokoModua(" ");
         this.mainApp.aukerakErakutsi();
     }
-
-
-    //beste metodoak
 
     public void setMainApp(Main main) { this.mainApp = main;
     }
@@ -600,7 +438,6 @@ public class MainKud implements Initializable {
     }
 
     private void fitxaZorizSartu(){
-        //this.itxaron(1000);
         ActionEvent actionEvent = new ActionEvent();
         Random rd = new Random();
         int zutabea = rd.nextInt(9);
