@@ -1,6 +1,7 @@
 package ehu.isad.controller.ui;
 
 import ehu.isad.Main;
+import ehu.isad.model.Fitxa;
 import ehu.isad.model.Tableroa;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +43,8 @@ public class MainKud implements Initializable {
     private Button btnSartu9;
     @FXML
     private Button btnAmoreEman;
+    @FXML
+    private Button btnBukatu;
 
     //Txanda
 
@@ -178,49 +181,57 @@ public class MainKud implements Initializable {
 
     private String jokoModua;
 
+    private int partidarenEmaitza=-1;
+
+    private long denbora;
+
+
     //botoien metodoak
 
     @FXML
-    public void onClickSartu1(ActionEvent actionEvent) {
-        botoiaSakatu(0);
-    }
+    public void onClickSartu1(ActionEvent actionEvent) { this.botoiaSakatu(0); }
+
     @FXML
-    public void onClickSartu2(ActionEvent actionEvent) {
-        botoiaSakatu(1);
-    }
+    public void onClickSartu2(ActionEvent actionEvent) { this.botoiaSakatu(1); }
+
     @FXML
-    public void onClickSartu3(ActionEvent actionEvent) {
-        botoiaSakatu(2);
-    }
+    public void onClickSartu3(ActionEvent actionEvent) { this.botoiaSakatu(2); }
+
     @FXML
-    public void onClickSartu4(ActionEvent actionEvent) {
-        botoiaSakatu(3);
-    }
+    public void onClickSartu4(ActionEvent actionEvent) { this.botoiaSakatu(3); }
+
     @FXML
-    public void onClickSartu5(ActionEvent actionEvent) {
-        botoiaSakatu(4);
-    }
+    public void onClickSartu5(ActionEvent actionEvent) { this.botoiaSakatu(4); }
+
     @FXML
-    public void onClickSartu6(ActionEvent actionEvent) {
-        botoiaSakatu(5);
-    }
+    public void onClickSartu6(ActionEvent actionEvent) { this.botoiaSakatu(5); }
+
     @FXML
-    public void onClickSartu7(ActionEvent actionEvent) {
-        botoiaSakatu(6);
-    }
+    public void onClickSartu7(ActionEvent actionEvent) { this.botoiaSakatu(6); }
+
     @FXML
-    public void onClickSartu8(ActionEvent actionEvent) {
-        botoiaSakatu(7);
-    }
+    public void onClickSartu8(ActionEvent actionEvent) { this.botoiaSakatu(7); }
+
     @FXML
-    public void onClickSartu9(ActionEvent actionEvent) {
-        botoiaSakatu(8);
-    }
+    public void onClickSartu9(ActionEvent actionEvent) { this.botoiaSakatu(8); }
 
     @FXML
     public void onClickAmoreEman(ActionEvent actionEvent) {
-        this.partidaBukatu();
+        this.partidaBukatu();mainApp.aukerakErakutsi();
     }
+
+    @FXML
+    public void onClickBukatu(ActionEvent actionEvent){
+        if(partidarenEmaitza==0){
+            mainApp.partidareEmaitzaIkusi("",jokoModua,denbora);
+        }else if(partidarenEmaitza==1){
+            mainApp.partidareEmaitzaIkusi("fitxaGorria",jokoModua,denbora);
+        }else if (partidarenEmaitza==2){
+            mainApp.partidareEmaitzaIkusi("fitxaUrdina",jokoModua,denbora);
+        }
+        partidaBukatu();
+    }
+
 
     //beste metodoak
 
@@ -234,6 +245,7 @@ public class MainKud implements Initializable {
             //aukeratu duen zutabea beteta dago
             lblZutabeaBeteta.setVisible(true);
             this.erronda--;
+            return;
 
         }else if(i==0) {
             if (errenkada == 0) {
@@ -363,20 +375,42 @@ public class MainKud implements Initializable {
             }
         }
 
-        this.txandaAldatu();
-
         if (this.erronda >= 7){
-            int partidaEmaitza = this.konprobatu();
+            partidarenEmaitza = this.konprobatu();
             /*
             partidaEmaitza== -1 --> partida ez da bukatu
             partidaEmaitza== 0 --> enpate bat egon da
             partidaEmaitza== 1 --> fitxaGorriak irabazi dute
             partidaEmaitza== 2 --> fitxaUrdinak irabazi dute
              */
-            if(partidaEmaitza==0 || partidaEmaitza==1 || partidaEmaitza==2) {
-                 this.partidaBukatu();
+            if (partidarenEmaitza==0){
+                denbora = (System.nanoTime() -denbora)/1000000000;
+                btnAmoreEman.setVisible(false);
+                btnSartu1.setVisible(false);
+                btnSartu2.setVisible(false);
+                btnSartu3.setVisible(false);
+                btnSartu4.setVisible(false);
+                btnSartu5.setVisible(false);
+                btnSartu6.setVisible(false);
+                btnSartu7.setVisible(false);
+                btnSartu8.setVisible(false);
+                btnSartu9.setVisible(false);
+                btnBukatu.setVisible(true);
+                return;
+            }else if (partidarenEmaitza== 1){
+                denbora = (System.nanoTime() -denbora)/1000000000;
+                fitxaIrabazleakAldatu(txanda);
+                return;
+
+            }else if (partidarenEmaitza == 2){
+                denbora = (System.nanoTime() -denbora)/1000000000;
+                fitxaIrabazleakAldatu(txanda);
+                return;
             }
         }
+
+        this.txandaAldatu();
+
 
         if("random".equals(this.jokoModua) && "fitxaGorria".equals(this.txanda)){
             this.fitxaZorizSartu();
@@ -386,6 +420,213 @@ public class MainKud implements Initializable {
 
     }
 
+    private void fitxaIrabazleakAldatu(String txanda) {
+        btnAmoreEman.setVisible(false);
+        btnSartu1.setVisible(false);
+        btnSartu2.setVisible(false);
+        btnSartu3.setVisible(false);
+        btnSartu4.setVisible(false);
+        btnSartu5.setVisible(false);
+        btnSartu6.setVisible(false);
+        btnSartu7.setVisible(false);
+        btnSartu8.setVisible(false);
+        btnSartu9.setVisible(false);
+        btnBukatu.setVisible(true);
+        Image fitxaIrabazleaIrudia;
+        if (txanda.equals("fitxaUrdina")){
+            fitxaIrabazleaIrudia = new Image("/Irudiak/fitxaUrdinaIrabazle.png");
+        }else{
+            fitxaIrabazleaIrudia = new Image("/Irudiak/fitxaGorriaIrabazle.png");
+        }
+        Fitxa[] fitxaIrabazleak = Tableroa.getInstantzia().getFitxaIrabazleakKokapena();
+        for (int i=0; i<4;i++){
+            int[] hunekoFitxaIrabazleaKokapena = fitxaIrabazleak[i].getKokapena();
+            int hunekoX = hunekoFitxaIrabazleaKokapena[0];
+            int hunekoY = hunekoFitxaIrabazleaKokapena[1];
+            if (hunekoX==0){
+                if(hunekoY==0){
+                    iv1x1.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x1.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x1.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x1.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x1.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x1.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==1){
+                if(hunekoY==0){
+                    iv1x2.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x2.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x2.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x2.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x2.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x2.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==2){
+                if(hunekoY==0){
+                    iv1x3.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x3.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x3.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x3.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x3.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x3.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==3){
+                if(hunekoY==0){
+                    iv1x4.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x4.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x4.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x4.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x4.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x4.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==4){
+                if(hunekoY==0){
+                    iv1x5.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x5.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x5.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x5.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x5.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x5.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==5){
+                if(hunekoY==0){
+                    iv1x6.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x6.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x6.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x6.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x6.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x6.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==6){
+                if(hunekoY==0){
+                    iv1x7.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x7.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x7.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x7.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x7.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x7.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==7){
+                if(hunekoY==0){
+                    iv1x8.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x8.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x8.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x8.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x8.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x8.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+            if (hunekoX==8){
+                if(hunekoY==0){
+                    iv1x9.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==1){
+                    iv2x9.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==2){
+                    iv3x9.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==3){
+                    iv4x9.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==4){
+                    iv5x9.setImage(fitxaIrabazleaIrudia);
+                }
+                if(hunekoY==5){
+                    iv6x9.setImage(fitxaIrabazleaIrudia);
+                }
+            }
+
+        }
+    }
+
     private void partidaBukatu(){
         txanda= "fitxaUrdina";
         lblTxanda.setText("Txanda: Fitxa Urdina");
@@ -393,28 +634,22 @@ public class MainKud implements Initializable {
         Tableroa.getInstantzia().tableroaEzabatu();
         this.erronda=0;
         this.setJokoModua(" ");
-        this.mainApp.aukerakErakutsi();
     }
+
 
     public void setMainApp(Main main) { this.mainApp = main;
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //defektuz hasieran
-        lblTxanda.setText("Txanda: Fitxa Urdina");
-        ivLogo.setImage(new Image("/HUTSIK/logo.png"));
-        this.fitxakKendu();
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) { }
 
     private int fitxaSartu(int pZutabea,String pTxanda){
         return Tableroa.getInstantzia().fitxaSartu(pZutabea, pTxanda);
     }
 
     private Image irudiaEsleitu(){
-        if ("fitxaUrdina".equals(txanda)){ return new Image("/HUTSIK/fitxaUrdina.png");}
-        else{ return new Image("/HUTSIK/fitxaGorria.png");}
+        if ("fitxaUrdina".equals(txanda)){ return new Image("/Irudiak/fitxaUrdina.png");}
+        else{ return new Image("/Irudiak/fitxaGorria.png");}
     }
 
     private void txandaAldatu(){
@@ -445,36 +680,13 @@ public class MainKud implements Initializable {
     }
 
     private void fitxaZorizSartu(){
-        ActionEvent actionEvent = new ActionEvent();
         Random rd = new Random();
         int zutabea = rd.nextInt(9);
-        if(zutabea==0){
-            this.onClickSartu1(actionEvent);
+        while(fitxaSartu(zutabea,txanda)==10){
+            zutabea = rd.nextInt(9);
         }
-        if(zutabea==1){
-            this.onClickSartu2(actionEvent);
-        }
-        else if(zutabea==2){
-            this.onClickSartu3(actionEvent);
-        }
-        else if(zutabea==3){
-            this.onClickSartu4(actionEvent);
-        }
-        else if(zutabea==4){
-            this.onClickSartu5(actionEvent);
-        }
-        else if(zutabea==5){
-            this.onClickSartu6(actionEvent);
-        }
-        else if(zutabea==6){
-            this.onClickSartu7(actionEvent);
-        }
-        else if(zutabea==7){
-            this.onClickSartu8(actionEvent);
-        }
-        else if(zutabea==8){
-            this.onClickSartu9(actionEvent);
-        }
+        Tableroa.getInstantzia().fitxaAtera(zutabea);
+        this.botoiaSakatu(zutabea);
     }
 
     private void makinarenKontraJolastu(){
@@ -484,39 +696,12 @@ public class MainKud implements Initializable {
         }else {
             aImugimendua = Tableroa.getInstantzia().lortuAImugimendua();
         }
-        ActionEvent actionEvent = new ActionEvent();
-        if(aImugimendua==0){
-            this.onClickSartu1(actionEvent);
-        }
-        if(aImugimendua==1){
-            this.onClickSartu2(actionEvent);
-        }
-        else if(aImugimendua==2){
-            this.onClickSartu3(actionEvent);
-        }
-        else if(aImugimendua==3){
-            this.onClickSartu4(actionEvent);
-        }
-        else if(aImugimendua==4){
-            this.onClickSartu5(actionEvent);
-        }
-        else if(aImugimendua==5){
-            this.onClickSartu6(actionEvent);
-        }
-        else if(aImugimendua==6){
-            this.onClickSartu7(actionEvent);
-        }
-        else if(aImugimendua==7){
-            this.onClickSartu8(actionEvent);
-        }
-        else if(aImugimendua==8){
-            this.onClickSartu9(actionEvent);
-        }
+        this.botoiaSakatu(aImugimendua);
     }
 
     private void fitxakKendu(){
         //fitxak hasieran hutsi
-        Image hutsik = new Image("/HUTSIK/hutsik.png");
+        Image hutsik = new Image("/Irudiak/hutsik.png");
         iv1x1.setImage(hutsik);
         iv1x2.setImage(hutsik);
         iv1x3.setImage(hutsik);
@@ -574,5 +759,23 @@ public class MainKud implements Initializable {
     }
 
 
-
+    public void guztiaPrestatu() {
+        //defektuz hasieran
+        btnBukatu.setVisible(false);
+        btnAmoreEman.setVisible(true);
+        btnSartu1.setVisible(true);
+        btnSartu2.setVisible(true);
+        btnSartu3.setVisible(true);
+        btnSartu4.setVisible(true);
+        btnSartu5.setVisible(true);
+        btnSartu6.setVisible(true);
+        btnSartu7.setVisible(true);
+        btnSartu8.setVisible(true);
+        btnSartu9.setVisible(true);
+        lblTxanda.setText("Txanda: Fitxa Urdina");
+        ivLogo.setImage(new Image("/Irudiak/logo.png"));
+        this.fitxakKendu();
+        partidarenEmaitza=-1;
+        denbora = System.nanoTime();
+    }
 }

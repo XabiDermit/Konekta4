@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.RankingTaulaKud">
+   <center>
+      <TableView fx:id="tvTaula" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="tcIzena" prefWidth="289.0" text="Izena" />
+          <TableColumn fx:id="tcDenbora" prefWidth="310.0" text="Denbora" />
+        </columns>
+      </TableView>
+   </center>
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+            <TextField fx:id="tfIzena" prefHeight="26.0" prefWidth="249.0" promptText="Zure izena" />
+            <Button fx:id="btnDenboraGorde" mnemonicParsing="false" onAction="#onClickDenboraGorde" text="Denbora Gorde" />
+          <Button fx:id="btnBukatu" mnemonicParsing="false" onAction="#onClickBukatu" text="Bukatu" />
+        </buttons>
+      </ButtonBar>
+   </bottom>
+</BorderPane>

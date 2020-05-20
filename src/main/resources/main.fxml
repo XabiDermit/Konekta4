@@ -390,7 +390,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="lblTxanda" prefHeight="16.0" prefWidth="433.0" text="Txanda:">
+                        <Label fx:id="lblTxanda" prefHeight="16.0" prefWidth="314.0" text="Txanda:">
                            <HBox.margin>
                               <Insets left="10.0" top="4.0" />
                            </HBox.margin></Label>
@@ -398,6 +398,7 @@
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></Button>
+                        <Button fx:id="btnBukatu" mnemonicParsing="false" onAction="#onClickBukatu" prefHeight="26.0" prefWidth="99.0" text="BUKATU" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />

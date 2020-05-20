@@ -9,7 +9,10 @@ public class Fitxa {
 
     private String fitxaMota= "esleituGabe";
 
+    private int[] kokapena;
+
     public Fitxa() {
+        kokapena = new int[2];
     }
 
     public boolean hutsikDago(){
@@ -24,5 +27,14 @@ public class Fitxa {
         this.fitxaMota = fitxaMota;
     }
 
+    public void setKokapena(int x, int y){
+        kokapena[0]=x;
+        kokapena[1]=y;
+    }
+
     public String getFitxaMota(){return fitxaMota;}
+
+    public int[] getKokapena(){
+        return kokapena;
+    }
 }

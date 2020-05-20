@@ -13,14 +13,20 @@ public class Main extends Application {
 
   private Parent aukeratuUI;
   private Parent mainUI;
+  private Parent partidaAmaieraUI;
+  private Parent rankingTaulaUI;
 
   private Stage stage;
 
   private AukeratuKud aukeratuKud;
   private MainKud mainKud;
+  private PartidaAmaieraKud partidaAmaieraKud;
+  private RankingTaulaKud rankingTaulaKud;
 
   private Scene aukeratuScene;
   private Scene mainScene;
+  private Scene partidaAmaieraScene;
+  private Scene rankingTaulaScene;
 
 
   @Override
@@ -47,8 +53,16 @@ public class Main extends Application {
     mainKud = laoderMain.getController();
     mainKud.setMainApp(this);
 
-  }
+    FXMLLoader laoderPartidaAmaiera = new FXMLLoader(getClass().getResource("/partidaAmaiera.fxml"));
+    partidaAmaieraUI = (Parent) laoderPartidaAmaiera.load();
+    partidaAmaieraKud = laoderPartidaAmaiera.getController();
+    partidaAmaieraKud.setMainApp(this);
 
+    FXMLLoader loaderRankingTaula = new FXMLLoader(getClass().getResource("/rankingTaula.fxml"));
+    rankingTaulaUI = (Parent) loaderRankingTaula.load();
+    rankingTaulaKud = loaderRankingTaula.getController();
+    rankingTaulaKud.setMainApp(this);
+  }
 
   public static void main(String[] args) {
     launch(args);
@@ -61,7 +75,8 @@ public class Main extends Application {
         stage.setScene(mainScene);
         stage.show();
         mainKud.setJokoModua(pJokoModua);
-        //mainKud.jolastu();
+        mainKud.guztiaPrestatu();
+
   }
 
   public void aukerakErakutsi(){
@@ -70,5 +85,27 @@ public class Main extends Application {
     }
     stage.setScene(aukeratuScene);
     stage.show();
+  }
+
+
+  public void partidareEmaitzaIkusi(String emaitza, String pJokoModua, long pDenbora){
+    if(partidaAmaieraScene==null){
+      partidaAmaieraScene = new Scene(partidaAmaieraUI);
+    }
+    stage.setScene(partidaAmaieraScene);
+    stage.show();
+    partidaAmaieraKud.setIrabazlea(emaitza);
+    partidaAmaieraKud.setDenbora(pDenbora);
+    partidaAmaieraKud.setJokoModua(pJokoModua);
+
+  }
+  public void rankingTaulaErakutsi(String pJokoModua, long pDenbora){
+    if (rankingTaulaScene==null){
+      rankingTaulaScene = new Scene(rankingTaulaUI);
+    }
+    stage.setScene(rankingTaulaScene);
+    stage.show();
+    rankingTaulaKud.guztiaPrestatu(pJokoModua,pDenbora);
+    rankingTaulaKud.setRanking();
   }
 }

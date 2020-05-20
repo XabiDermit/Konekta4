@@ -5,17 +5,23 @@ public class Tableroa {
     //singleton patroia
     public static Tableroa instantzia= new Tableroa();
     public static Tableroa getInstantzia(){return instantzia;}
+    private Fitxa[] fitxaIrabazleak = new Fitxa[4];
 
     private Tableroa(){
         for(int i=0;i<9;i++){
             for (int j=0;j<6;j++){
-                tableroa[j][i]= new Fitxa();
+                Fitxa fitxa = new Fitxa();
+                fitxa.setKokapena(i,j);
+                tableroa[j][i]= fitxa;
             }
+        }
+        for (int i =0; i<4;i++){
+            fitxaIrabazleak[i] = new Fitxa();
         }
     }
 
     private Fitxa[][] tableroa = new Fitxa[6][9];
-    private int sakoneraMax = 9;
+    private int sakoneraMax = 1;
     private int hurrengoMugimenduaNon=-1;
 
     public int fitxaSartu(int pZutabea,String pTxanda){
@@ -44,6 +50,7 @@ public class Tableroa {
     public int konprobatu() {                         //konprobatu modu batean eta irabazlea badago ez dira besteak konprobatzen
         int fitxaUrdinPunt = 0;
         int fitxaGorriPunt = 0;
+        String[] fitxaIrabazleKokapena;
         for(int i=5;i>=0;--i){
             for(int j=0;j<=8;++j){
                 if(tableroa[i][j].getFitxaMota().equals("esleituGabe")) continue;                  //si esa casilla esta vacia no comprabar desde ahi
@@ -51,8 +58,14 @@ public class Tableroa {
                 //Checking cells to the right
                 if(j<=5){               //5 [0..8] es la ultima casilla de la que se puede empezar a contar hasta 4
                     for(int k=0;k<4;++k){
-                        if(tableroa[i][j+k].getFitxaMota().equals("fitxaGorria")) fitxaGorriPunt++;
-                        else if(tableroa[i][j+k].getFitxaMota().equals("fitxaUrdina")) fitxaUrdinPunt++;
+                        if(tableroa[i][j+k].getFitxaMota().equals("fitxaGorria")){
+                            fitxaGorriPunt++;
+                            fitxaIrabazleak[k].setKokapena(j+k,i);
+                        }
+                        else if(tableroa[i][j+k].getFitxaMota().equals("fitxaUrdina")) {
+                            fitxaUrdinPunt++;
+                            fitxaIrabazleak[k].setKokapena(j+k,i);
+                        }
                         else break;
                     }
                     if(fitxaGorriPunt==4)return 1; else if (fitxaUrdinPunt==4)return 2;
@@ -62,8 +75,14 @@ public class Tableroa {
                 //Checking cells up
                 if(i>=3){               //3 [0..5] es la ultima casilla de la que se puede empezar a contar hasta 4
                     for(int k=0;k<4;++k){
-                        if(tableroa[i-k][j].getFitxaMota().equals("fitxaGorria")) fitxaGorriPunt++;
-                        else if(tableroa[i-k][j].getFitxaMota().equals("fitxaUrdina")) fitxaUrdinPunt++;
+                        if(tableroa[i-k][j].getFitxaMota().equals("fitxaGorria")){
+                            fitxaGorriPunt++;
+                            fitxaIrabazleak[k].setKokapena(j,i-k);
+                        }
+                        else if(tableroa[i-k][j].getFitxaMota().equals("fitxaUrdina")) {
+                            fitxaUrdinPunt++;
+                            fitxaIrabazleak[k].setKokapena(j,i-k);
+                        }
                         else break;
                     }
                     if(fitxaGorriPunt==4)return 1; else if (fitxaUrdinPunt==4)return 2;
@@ -73,8 +92,14 @@ public class Tableroa {
                 //Checking diagonal up-right
                 if(j<=5 && i>= 3){
                     for(int k=0;k<4;++k){
-                        if(tableroa[i-k][j+k].getFitxaMota().equals("fitxaGorria")) fitxaGorriPunt++;
-                        else if(tableroa[i-k][j+k].getFitxaMota().equals("fitxaUrdina")) fitxaUrdinPunt++;
+                        if(tableroa[i-k][j+k].getFitxaMota().equals("fitxaGorria")){
+                            fitxaGorriPunt++;
+                            fitxaIrabazleak[k].setKokapena(j+k,i-k);
+                        }
+                        else if(tableroa[i-k][j+k].getFitxaMota().equals("fitxaUrdina")){
+                            fitxaUrdinPunt++;
+                            fitxaIrabazleak[k].setKokapena(j+k,i-k);
+                        }
                         else break;
                     }
                     if(fitxaGorriPunt==4)return 1; else if (fitxaUrdinPunt==4)return 2;
@@ -84,8 +109,14 @@ public class Tableroa {
                 //Checking diagonal up-left
                 if(j>=3 && i>=3){
                     for(int k=0;k<4;++k){
-                        if(tableroa[i-k][j-k].getFitxaMota().equals("fitxaGorria")) fitxaGorriPunt++;
-                        else if(tableroa[i-k][j-k].getFitxaMota().equals("fitxaUrdina")) fitxaUrdinPunt++;
+                        if(tableroa[i-k][j-k].getFitxaMota().equals("fitxaGorria")){
+                            fitxaGorriPunt++;
+                            fitxaIrabazleak[k].setKokapena(j-k,i-k);
+                        }
+                        else if(tableroa[i-k][j-k].getFitxaMota().equals("fitxaUrdina")){
+                            fitxaUrdinPunt++;
+                            fitxaIrabazleak[k].setKokapena(j-k,i-k);
+                        }
                         else break;
                     }
                     if(fitxaGorriPunt==4)return 1; else if (fitxaUrdinPunt==4)return 2;
@@ -94,265 +125,12 @@ public class Tableroa {
             }
         }
 
-        for(int j=0;j<7;++j){
+        for(int j=0;j<8;++j){
             //Game has not ended yet
             if(tableroa[0][j].getFitxaMota().equals("esleituGabe"))return -1;
         }
         //Game draw!
         return 0;
-    }
-
-    private boolean konprobatuHorizontalean(){
-        for (int j = 0; j<6;j++){
-            int zenbatOndoJarraian =0;
-            for (int i= 0;i<8;i++) {
-                //errenkada osoa errekorritu
-                String unekoFitxaMota = tableroa[5-j][i].getFitxaMota();
-                String hurrengoFixtaMota = tableroa[5-j][i+1].getFitxaMota();
-                if (unekoFitxaMota.equals(hurrengoFixtaMota)&& !"esleituGabe".equals(hurrengoFixtaMota) ) {
-                    zenbatOndoJarraian++;
-                    if (zenbatOndoJarraian == 3) {  //konekta 4 da, baina bikoteka konparatzen direnez fitxa, hiru bikote ondo baude, 4 fitxa jarraian daudela esan nahi du
-                        return true;
-                    }
-                }
-                else {
-                    zenbatOndoJarraian = 0;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean konprobatuBertikalean(){
-        for (int j = 0; j<9;j++){
-            int zenbatOndoJarraian =0;
-            for (int i= 0;i<5;i++) {
-                //errenkada osoa errekorritu
-                String unekoFitxaMota = tableroa[5-i][j].getFitxaMota();
-                String hurrengoFitxaMota = tableroa[4-i][j].getFitxaMota();
-                if (unekoFitxaMota.equals(hurrengoFitxaMota) && !"esleituGabe".equals(hurrengoFitxaMota)) {
-                    zenbatOndoJarraian++;
-                    if (zenbatOndoJarraian == 3) {  //konekta 4 da, baina bikoteka konparatzen direnez fitxa, hiru bikote ondo baude, 4 fitxa jarraian daudela esan nahi du
-                        return true;
-                    }
-                }
-                else {
-                    zenbatOndoJarraian = 0;
-                }
-
-            }
-
-        }
-        return false;
-    }
-
-    private boolean konprobatuDiagonaleanEzkerretikEskumara(){      //behetik gora /
-
-        /*
-        Horizontalean eta bertikalean konprobatzen dugunean, konprobatzen ditugun errenkada/zutabe guztiak luzeera berdina izango dute,
-        eta horregaitik 'for' bat erabiltzen dugunean ez ditugu arazoak izango.
-        Diagonalean konprobatzen dugunean, diagonal desberdinak izango ditugu eta luzeera desberdinak izango dituzte:
-                -4 luzeerako diagonalak: 2
-                -5 luzeerako diagonalak: 2
-                -6 luzeerako diagonalak: 4
-                (1, 2 eta 3 luzeerako diagonalean ez dira konprobatzen)
-        */
-
-        int zenbatOndoJarraian = 0;
-
-        //4 luzeerako 1.kasua
-
-        for (int i = 0; i<3; i++){
-            String unekoFitxaMota = tableroa[3-i][i].getFitxaMota();
-            String hurrengoFitxaMota = tableroa[2-i][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota) && !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if (zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else {
-                zenbatOndoJarraian = 0;
-            }
-        }
-
-        zenbatOndoJarraian = 0;     //no estoy seguro, solo por si acaso
-
-        //4 luzeerako 2.kasua
-
-        for (int i = 5; i<8;i++){
-            String unekoFitxaMota = tableroa[10-i][i].getFitxaMota();
-            String hurrengoFitxaMota  = tableroa[9-i][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if(zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else{
-                zenbatOndoJarraian=0;
-            }
-        }
-
-        zenbatOndoJarraian=0;       //no estoy seguro, solo por si acaso
-
-        //5 luzeerako 1. kasua
-
-        for (int i = 0;i<4;i++){
-            String unekoFitxaMota = tableroa[4-i][i].getFitxaMota();
-            String hurrengoFitxaMota = tableroa[3-i][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if(zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else{
-                zenbatOndoJarraian=0;
-            }
-        }
-
-        zenbatOndoJarraian=0;       //no estoy seguro, solo por si acaso
-
-        //5 luzeerako 2.kasua
-
-        for(int i= 4; i<8; i++){
-            String unekoFitxaMota = tableroa[9-i][i].getFitxaMota();
-            String hurrengoFitxaMota = tableroa[8-i][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if(zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else{
-                zenbatOndoJarraian=0;
-            }
-        }
-
-        zenbatOndoJarraian=0;       //no estoy seguro, solo por si acaso
-
-        //6 luzeerako kasuak
-
-        //horizontalean mugitzeko
-        for (int j=0; j<4;j++){
-            //diagonalean mugitzeko
-            for(int i= 0; i<5; i++){
-                String unekoFitxaMota = tableroa[5-i][i+j].getFitxaMota();
-                String hurrengoFitxaMota = tableroa[4-i][i+1+j].getFitxaMota();
-                if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                    zenbatOndoJarraian++;
-                    if(zenbatOndoJarraian==3){
-                        return true;
-                    }
-                }else{
-                    zenbatOndoJarraian=0;
-                }
-            }
-
-        }
-        return false;
-    }
-
-    private boolean konprobatuDiagonaleanEskumatikEzkerrera(){      //behetik gora \
-
-        /*
-        Horizontalean eta bertikalean konprobatzen dugunean, konprobatzen ditugun errenkada/zutabe guztiak luzeera berdina izango dute,
-        eta horregaitik 'for' bat erabiltzen dugunean ez ditugu arazoak izango.
-        Diagonalean konprobatzen dugunean, diagonal desberdinak izango ditugu eta luzeera desberdinak izango dituzte:
-                -4 luzeerako diagonalak: 2
-                -5 luzeerako diagonalak: 2
-                -6 luzeerako diagonalak: 4
-                (1, 2 eta 3 luzeerako diagonalean ez dira konprobatzen)
-        */
-
-        int zenbatOndoJarraian = 0;
-
-        //4 luzeerako 1. kasua
-
-        for (int i = 0; i<3; i++){
-            String unekoFitxaMota = tableroa[2+i][i].getFitxaMota();
-            String hurrengoFitxaMota = tableroa[3+i][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota) && !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if (zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else {
-                zenbatOndoJarraian = 0;
-            }
-        }
-
-        zenbatOndoJarraian = 0;
-
-        //4 luzeerako 2. kasua
-
-        for (int i = 5; i<8;i++){
-            String unekoFitxaMota = tableroa[i-5][i].getFitxaMota();
-            String hurrengoFitxaMota  = tableroa[i-4][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if(zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else{
-                zenbatOndoJarraian=0;
-            }
-        }
-
-        zenbatOndoJarraian = 0;
-
-        //5 luzeerako 1. kasua
-
-        for (int i = 0;i<4;i++){
-            String unekoFitxaMota = tableroa[1+i][i].getFitxaMota();
-            String hurrengoFitxaMota = tableroa[2+i][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if(zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else{
-                zenbatOndoJarraian=0;
-            }
-        }
-
-        zenbatOndoJarraian = 0;
-
-        //5 luzeerako 2. kasua
-
-        for(int i= 4; i<8; i++){
-            String unekoFitxaMota = tableroa[i-4][i].getFitxaMota();
-            String hurrengoFitxaMota = tableroa[i-3][i+1].getFitxaMota();
-            if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                zenbatOndoJarraian++;
-                if(zenbatOndoJarraian==3){
-                    return true;
-                }
-            }else{
-                zenbatOndoJarraian=0;
-            }
-        }
-
-        zenbatOndoJarraian = 0;
-
-        //6 luzeerako kasuak
-
-        //horizontalean mugitzeko
-        for (int j=0; j<4;j++){
-            //diagonalean mugitzeko
-            for(int i= 0; i<5; i++){
-                String unekoFitxaMota = tableroa[i][i+j].getFitxaMota();
-                String hurrengoFitxaMota = tableroa[1+i][i+1+j].getFitxaMota();
-                if(unekoFitxaMota.equals(hurrengoFitxaMota)&& !"esleituGabe".equals(hurrengoFitxaMota)){
-                    zenbatOndoJarraian++;
-                    if(zenbatOndoJarraian==3){
-                        return true;
-                    }
-                }else{
-                    zenbatOndoJarraian=0;
-                }
-            }
-
-        }
-
-        return false;
     }
 
 
@@ -574,5 +352,9 @@ public class Tableroa {
                 tableroa[j][i].setFitxaMota("esleituGabe");
             }
         }
+    }
+
+    public Fitxa[] getFitxaIrabazleakKokapena(){
+        return fitxaIrabazleak;
     }
 }
