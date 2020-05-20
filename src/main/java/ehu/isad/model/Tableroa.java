@@ -21,7 +21,7 @@ public class Tableroa {
     }
 
     private Fitxa[][] tableroa = new Fitxa[6][9];
-    private int sakoneraMax = 1;
+    private int sakoneraMax = 8;
     private int hurrengoMugimenduaNon=-1;
 
     public int fitxaSartu(int pZutabea,String pTxanda){

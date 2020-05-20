@@ -7,7 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main extends Application {
 
@@ -32,6 +37,7 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
 
+    datuBaseaHasieratu();
     stage = primaryStage;
     pantailakKargatu();
 
@@ -39,6 +45,33 @@ public class Main extends Application {
     aukeratuScene = new Scene(aukeratuUI);
     stage.setScene(aukeratuScene);
     stage.show();
+  }
+
+  private void datuBaseaHasieratu(){
+
+    Path source = null;
+    Path destination = null;
+
+    String path = System.getProperty("user.home") + File.separatorChar + ".Konekta4" + File.separatorChar + "Konekta4.sqlite";
+    if(!(new File(path).exists())) {
+      try {
+        File sourceFile = new File( getClass().getClassLoader().getResource("Konekta4.sqlite").toURI() );
+        Path sourcePath = sourceFile.toPath();
+
+        File destFile = new File(path);
+        Path destPath = destFile.toPath();
+
+        File destDir = new File(System.getProperty("user.home") + File.separatorChar + ".Konekta4" + File.separatorChar);
+        Path destPathDir = destDir.toPath();
+        Files.createDirectories(destPathDir);
+
+
+        Files.copy( sourcePath, destPath );
+
+      } catch (URISyntaxException | IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   private void pantailakKargatu() throws IOException {

@@ -57,24 +57,8 @@ public class DBKudeatzaile {
 	// singleton patroia
 	private static DBKudeatzaile instantzia ;
 	private DBKudeatzaile()  {
-/*
-		Properties properties = null;
-		InputStream in = null;
 
-		try {
-			in = this.getClass().getResourceAsStream("/setup.properties");
-			properties = new Properties();
-			properties.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}*/
-		String path = "/home/xabi/IdeaProjects/Konekta4/src/main/resources/DB/Konekta4.sqlite";
+		String path = System.getProperty("user.home") + File.separatorChar + ".Konekta4" + File.separatorChar + "Konekta4.sqlite";
 		this.conOpen(path);
 
 	}
