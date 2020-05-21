@@ -55,7 +55,6 @@ public class Tableroa {
             for(int j=0;j<=8;++j){
                 if(tableroa[i][j].getFitxaMota().equals("esleituGabe")) continue;                  //si esa casilla esta vacia no comprabar desde ahi
 
-                //Checking cells to the right
                 if(j<=5){               //5 [0..8] es la ultima casilla de la que se puede empezar a contar hasta 4
                     for(int k=0;k<4;++k){
                         if(tableroa[i][j+k].getFitxaMota().equals("fitxaGorria")){
@@ -72,7 +71,6 @@ public class Tableroa {
                     fitxaGorriPunt = 0; fitxaUrdinPunt = 0;
                 }
 
-                //Checking cells up
                 if(i>=3){               //3 [0..5] es la ultima casilla de la que se puede empezar a contar hasta 4
                     for(int k=0;k<4;++k){
                         if(tableroa[i-k][j].getFitxaMota().equals("fitxaGorria")){
@@ -89,7 +87,7 @@ public class Tableroa {
                     fitxaGorriPunt = 0; fitxaUrdinPunt = 0;
                 }
 
-                //Checking diagonal up-right
+
                 if(j<=5 && i>= 3){
                     for(int k=0;k<4;++k){
                         if(tableroa[i-k][j+k].getFitxaMota().equals("fitxaGorria")){
@@ -106,7 +104,6 @@ public class Tableroa {
                     fitxaGorriPunt = 0; fitxaUrdinPunt = 0;
                 }
 
-                //Checking diagonal up-left
                 if(j>=3 && i>=3){
                     for(int k=0;k<4;++k){
                         if(tableroa[i-k][j-k].getFitxaMota().equals("fitxaGorria")){
@@ -126,10 +123,10 @@ public class Tableroa {
         }
 
         for(int j=0;j<8;++j){
-            //Game has not ended yet
+
             if(tableroa[0][j].getFitxaMota().equals("esleituGabe"))return -1;
         }
-        //Game draw!
+
         return 0;
     }
 
@@ -304,7 +301,7 @@ public class Tableroa {
 
             int hunekoPuntuazioa = 0;
 
-            if(!lekuaDagoZutabean(j)) continue;         //no le veo el sentido
+            if(!lekuaDagoZutabean(j)) continue;
 
             if(txanda.equals("fitxaGorria")){            //turno de la IA
                 fitxaSartu(j,"fitxaGorria");      //mete una ficha en la columna j y vuelve a llamar a minimax
